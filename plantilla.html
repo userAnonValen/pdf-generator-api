@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo</title>
+    <style>
+        @font-face {
+            font-family: 'Kollektif';
+            src: url('fonts/Kollektif.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Kollektif';
+            src: url('fonts/Kollektif-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #1d1d1f;
+        }
+
+        .portada {
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 60px 80px;
+            position: relative;
+            min-height: 1200px;
+        }
+
+        .titulo-portada {
+            position: absolute;
+            top: 200px;
+            left: 60px;
+            font-family: 'Kollektif', sans-serif;
+            color: #1a1a1a;
+        }
+
+        .titulo-portada .linea1 {
+            font-size: 69px;
+            font-weight: normal;
+            line-height: 1.1;
+        }
+
+        .titulo-portada .linea2 {
+            font-size: 69px;
+            margin-top: 10px;
+            color: rgb(141, 161, 203)
+        }
+
+        .portada hr {
+            border: none;
+            border-top: 3px solid white;
+            margin: 40px 0 20px 0;
+            width: 85%;
+        }
+
+        .portada-footer {
+            background-color: #3E526A;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            padding: 12px 0;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            min-height: 500px;
+        }
+
+        /* ✅ OPTIMIZACIÓN: Permitir más productos por página manteniendo armonía */
+        .categoria-pagina {
+            page-break-before: always;
+            padding: 0;
+            page-break-inside: avoid; /* Evita cortar la página a la mitad */
+        }
+        
+        .categoria-pagina:first-of-type {
+            page-break-before: avoid;
+        }
+
+        .producto-item {
+            page-break-inside: avoid; /* Evita cortar un producto entre páginas */
+            break-inside: avoid; /* Para mejor compatibilidad */
+        }
+
+        .categoria-header {
+            background-color: #3E526A;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            min-height: 250px;
+        }
+
+        .categoria-header .logo-wartec-texto {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1;
+        }
+
+        .categoria-header .logo-wartec-texto .titulo {
+            font-family: 'Kollektif', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+
+        .categoria-header .logo-wartec-texto .subtitulo {
+            font-family: 'EthosNova', sans-serif;
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: white;
+            margin-top: 2px;
+            align-self: center;
+        }
+
+        .categoria-header .fecha {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            color: white;
+            position: absolute;
+            top: 58px;
+            right: 61px;
+        }
+
+        .categoria-header .nombre-categoria {
+            left: 60px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            top: 138px;
+            color: white;
+        }
+
+        .categoria-header .nombre-categoria .linea1 {
+            font-family: 'Kollektif', sans-serif;
+            font-weight: bold;
+            font-size: 60px;
+            line-height: 1.1;
+        }
+
+        .categoria-header .nombre-categoria .linea2 {
+            font-family: 'EthosNova', sans-serif;
+            margin-top: -6px;
+            font-size: 40px;
+            font-weight: normal;
+        }
+
+        .categoria-contenido {
+            padding: 40px 60px;
+            /* ✅ Permitir que el contenido fluya naturalmente */
+            page-break-inside: auto;
+        }
+
+        .productos-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Reducido para aprovechar mejor el espacio */
+        }
+
+        .producto-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding: 8px 0; /* Reducido para aprovechar mejor el espacio */
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .producto-imagen img {
+            width: 100px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .producto-info {
+            flex: 1;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .producto-nombre {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .producto-specs {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .producto-precio {
+            font-weight: bold;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .logo-wartec-texto {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .logo-wartec-texto .titulo {
+            font-family: 'Kollektif', sans-serif;
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: #1a1a1a;
+        }
+
+        .logo-wartec-texto .subtitulo {
+            font-family: 'EthosNova', sans-serif;
+            font-size: 11.55px;
+            letter-spacing: 5px;
+            color: #1a1a1a;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="portada">
+        <div class="logo-wartec-texto">
+            <div class="titulo">WARTEC</div>
+            <div class="subtitulo">IMPORTADOS</div>
+        </div>
+        <div class="titulo-portada">
+            <div class="linea1">Catálogo de<br>Productos</div>
+            <div class="linea2">Apple</div>
+        </div>
+        <hr>
+        <div class="portada-footer">
+            <img src="imagenes/logo.png" alt="Logo" style="width: 650px;">
+        </div>
+    </div>
+
+    {% for categoria, items in productos|groupby('categoria') %}
+    {% set productos_lista = items | list %}
+    {% set productos_por_pagina = 4 %} {# Ajusta según cuántos quepan bien #}
+    
+    {% for batch_start in range(0, productos_lista|length, productos_por_pagina) %}
+    <div class="categoria-pagina">
+        <div class="categoria-header">
+            <div class="header-top">
+                <div class="logo-wartec-texto">
+                    <div class="titulo">WARTEC</div>
+                    <div class="subtitulo">IMPORTADOS</div>
+                </div>
+                <div class="fecha">JULIO 2025</div>
+            </div>
+            <div class="nombre-categoria">
+                <div class="linea1">Catálogo</div>
+                <div class="linea2">{{ categoria }}</div>
+            </div>
+        </div>
+        <div class="categoria-contenido">
+            <div class="productos-grid">
+                <!-- ✅ Productos en lotes para evitar desbordamiento -->
+                {% for producto in productos_lista[batch_start:batch_start + productos_por_pagina] %}
+                <div class="producto-item">
+                    <div class="producto-imagen">
+                        {% if producto.imagen %}
+                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}">
+                        {% endif %}
+                    </div>
+                    <div class="producto-info">
+                        <div class="producto-nombre">{{ producto.nombre }}</div>
+                        <div class="producto-specs">{{ producto.descripcion or '' }}</div>
+                    </div>
+                    <div class="producto-precio">USD {{ "{:,}".format(producto.precio).replace(',', '.') }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+
+</body>
+
+</html>
