@@ -65,10 +65,11 @@ def generar_estadisticas(productos):
 
 def groupby_filter(seq, attribute):
     orden_categorias = {
-        'iPhones': 1,
-        'iPads': 2, 
+        'iPhone': 1,
+        'iPad': 2, 
         'Apple Watch': 3,
-        'AirPods': 4
+        'AirPods': 4,
+        'Samsung': 5
     }
 
     def sort_key(item):
